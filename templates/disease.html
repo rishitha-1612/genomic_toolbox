@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Disease Predictor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Silkscreen&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="result">
+  <div class="container">
+    <h2>Disease Prediction</h2>
+
+    {% if matches %}
+      <ul>
+        {% for d in matches %}
+          <li>
+            <strong>{{ d.disease }}</strong><br>
+            Gene: {{ d.gene }}<br>
+            Position: {{ d.pos }}<br>
+            Mutation: {{ d.change }}
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No known diseases detected from the mutations.</p>
+    {% endif %}
+
+    <br>
+    <button onclick="location.href='/dashboard'" class="button-54">Back</button>
+  </div>
+</body>
+</html>

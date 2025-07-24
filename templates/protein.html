@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Protein Translator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Silkscreen&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+  <style>
+    .codon {
+      display: inline-block;
+      margin: 6px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 18px;
+      color: white;
+      background-color: #000000;
+    }
+
+    .start {
+      text-decoration: underline;
+      text-decoration-color: #00ff00;
+      text-decoration-thickness: 3px;
+    }
+
+    .stop {
+      text-decoration: underline;
+      text-decoration-color: red;
+      text-decoration-thickness: 3px;
+    }
+
+    .normal {
+      /* inherits base codon styling */
+    }
+  </style>
+</head>
+<body class="result">
+  <div class="container">
+    <h2>Protein Translation</h2>
+
+    {% for i in range(codons|length) %}
+      {% set codon = codons[i] %}
+      {% set aa = amino_acids[i] %}
+      {% if codon == 'ATG' %}
+        {% set css_class = 'start' %}
+      {% elif codon in ['TAA', 'TAG', 'TGA'] %}
+        {% set css_class = 'stop' %}
+      {% else %}
+        {% set css_class = 'normal' %}
+      {% endif %}
+      <span class="codon {{ css_class }}">{{ codon }} → {{ aa }}</span>
+    {% endfor %}
+
+    <br><br>
+    <button onclick="location.href='/dashboard'" class="button-54">Back</button>
+  </div>
+</body>
+</html>

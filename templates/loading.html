@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Loading</title>
+  <link href="https://fonts.googleapis.com/css2?family=Silkscreen&display=swap" rel="stylesheet">
+  <meta http-equiv="refresh" content="2;url={{ url_for('input_page') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: black;
+      color: white;
+      font-family: 'silkscreen', monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #preloader {
+      text-align: center;
+    }
+
+    .loading-text {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      text-align: left;
+    }
+
+    .subtext {
+      font-size: 2.5em;
+    }
+
+    .flicker {
+      color: #17b727;
+      text-shadow: 0 0 5px red, 0 0 10px #17b727;
+      animation: flicker 1s infinite alternate;
+    }
+
+    @keyframes flicker {
+      0%   { opacity: 1; text-shadow: 0 0 10px #17b727; }
+      50%  { opacity: 0.4; text-shadow: 0 0 5px #17b727; }
+      100% { opacity: 1; text-shadow: 0 0 10px #17b727; }
+    }
+  </style>
+</head>
+<body>
+  <div id="preloader">
+    <div class="loading-text">Loading</div>
+    <div class="subtext">your <span class="flicker">DNA</span> experience...</div>
+  </div>
+</body>
+</html>

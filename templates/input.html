@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Enter DNA Sequences</title>
+  <link href="https://fonts.googleapis.com/css2?family=Silkscreen&display=swap" rel="stylesheet">
+  <style>
+    body.input {
+      background-color: #000000;
+      color: #17b727;
+      font-family: 'Silkscreen', monospace;
+      padding: 30px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #17b727;
+      margin-bottom: 30px;
+    }
+
+    .tools {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .tool-box {
+      width: 500px;
+      min-height: 160px;
+      background: #000000;
+      border: 4px solid #17b727;
+      color: #17b727;
+      padding: 20px;
+      text-align: left;
+      font-size: 14px;
+      border-radius: 8px;
+      box-shadow: 4px 4px 0 #17b727;
+      transition: border 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .tool-box:focus-within {
+      border: 4px solid #ffffff;
+      box-shadow: 4px 4px 0 #ffffff;
+    }
+
+    .tool-box label {
+      display: block;
+      margin-bottom: 12px;
+      color: #17b727;
+    }
+
+    .tool-box textarea {
+      width: 100%;
+      height: 60px;
+      padding: 10px;
+      background-color: #000000;
+      border: none;
+      color: #17b727;
+      font-family: 'Silkscreen', monospace;
+      border-radius: 6px;
+      resize: none;
+      font-size: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .tool-box textarea:focus {
+      outline: none;
+      box-shadow: none;
+      background-color: #000000;
+      color: #17b727;
+    }
+
+    .button-54 {
+      display: block;
+      margin: 40px auto 0 auto;
+      font-family: "silkscreen", sans-serif;
+      font-size: 16px;
+      letter-spacing: 2px;
+      text-decoration: none;
+      text-transform: uppercase;
+      color: #17b727;
+      cursor: pointer;
+      border: 3px solid;
+      padding: 0.25em 0.5em;
+      box-shadow: 1px 1px 0px 0px,
+                  2px 2px 0px 0px,
+                  3px 3px 0px 0px,
+                  4px 4px 0px 0px,
+                  5px 5px 0px 0px;
+      position: relative;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+    }
+
+    .button-54:active {
+      box-shadow: 0px 0px 0px 0px;
+      top: 5px;
+      left: 5px;
+    }
+
+    @media (min-width: 768px) {
+      .button-54 {
+        padding: 0.25em 0.75em;
+      }
+    }
+  </style>
+
+  <script>
+    function validateDNA(event) {
+      const original = document.querySelector("textarea[name='original']").value.trim().toUpperCase();
+      const mutated = document.querySelector("textarea[name='mutated']").value.trim().toUpperCase();
+      const dnaRegex = /^[ATCG]+$/;
+
+      if (!dnaRegex.test(original) || !dnaRegex.test(mutated)) {
+        alert("Please enter valid sequences.");
+        event.preventDefault();
+        return false;
+      }
+
+      if (original.length !== mutated.length) {
+        alert("Original and Mutated sequences must be of the same length.");
+        event.preventDefault();
+        return false;
+      }
+
+      return true;
+    }
+  </script>
+</head>
+
+<body class="input">
+  <h2>Enter Your DNA Sequences</h2>
+  <form action="/analyze" method="post" onsubmit="return validateDNA(event)">
+    <div class="tools">
+      <div class="tool-box">
+        <label for="original">Original DNA Sequence:</label>
+        <textarea name="original" required></textarea>
+      </div>
+
+      <div class="tool-box">
+        <label for="mutated">Mutated DNA Sequence:</label>
+        <textarea name="mutated" required></textarea>
+      </div>
+    </div>
+    <button class="button-54">Submit</button>
+  </form>
+</body>
+</html>

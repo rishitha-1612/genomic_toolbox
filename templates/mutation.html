@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Mutation Checker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Silkscreen&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+  <style>
+    .highlight { background-color: floralwhite; font-weight: bold; }
+    .code-block { font-family: silkscreen; white-space: pre-wrap; }
+  </style>
+</head>
+<body class="result">
+  <div class="container">
+    <h2>Mutation Results</h2>
+    <p><strong>Original DNA:</strong></p>
+    <p class="code-block">{{ original }}</p>
+    <p><strong>Mutated DNA:</strong></p>
+    <p class="code-block">{{ mutated }}</p>
+    <p><strong>Mutations Found:</strong> {{ count }}</p>
+    <pre class="code-block">{{ result | safe }}</pre>
+    <br><br>
+    <button onclick="location.href='/dashboard'" class="button-54">Back</button>
+  </div>
+</body>
+</html>
