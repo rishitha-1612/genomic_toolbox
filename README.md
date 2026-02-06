@@ -3,6 +3,8 @@ Genomic Toolbox
 * Genomic Toolbox is a web-based DNA analysis platform developed using Python Flask. It allows users to input original and mutated DNA sequences, visualize differences, translate DNA into protein, and predict potential diseases based on known mutations.
 This tool was developed as an interdisciplinary project combining Computer Science and Biotechnology
 
+* Live Demo - 
+
 * Project Objective
 The main objective of Genomic Toolbox is to provide a simple interface for students, researchers, and developers to:
 Detect point mutations in DNA sequences.
@@ -83,26 +85,6 @@ Frontend- HTML, CSS
 Backend- Python (Flask)
 Data Storage- JSON (for diseases)
 Hosting- Flask Dev Server
-
-* Folder Structure
-
-genomic_toolbox/
-│
-├── static/
-│   └── style.css
-│
-├── templates/
-│   ├── index.html
-│   ├── loading.html
-│   ├── input.html
-│   ├── dashboard.html
-│   ├── mutation.html
-│   ├── protein.html
-│   └── disease.html
-│
-├── disease_data.json
-├── main.py
-└── README.md
 
 * Setup Instructions
 1. Make sure Python is installed on your system.
