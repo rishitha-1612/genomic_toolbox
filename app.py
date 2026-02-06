@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import json
+import os
 
 app = Flask(__name__)
 data_store = {}
@@ -36,7 +37,13 @@ def mutation_page():
         else:
             highlighted += mutated[i]
 
-    return render_template("mutation.html", original=original, mutated=mutated, result=highlighted, count=count)
+    return render_template(
+        "mutation.html",
+        original=original,
+        mutated=mutated,
+        result=highlighted,
+        count=count
+    )
 
 @app.route('/protein')
 def protein_page():
@@ -68,7 +75,11 @@ def protein_page():
             codons.append(codon)
             amino_acids.append(codon_table.get(codon, "-"))
 
-    return render_template("protein.html", codons=codons, amino_acids=amino_acids)
+    return render_template(
+        "protein.html",
+        codons=codons,
+        amino_acids=amino_acids
+    )
 
 @app.route('/disease')
 def disease_page():
@@ -76,7 +87,8 @@ def disease_page():
     mutated = data_store.get("mutated", "")
 
     try:
-        with open('disease_data.json') as f:
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        with open(os.path.join(BASE_DIR, 'disease_data.json')) as f:
             disease_list = json.load(f)
     except Exception as e:
         return f"<h2>Error loading disease data: {e}</h2>"
@@ -89,16 +101,13 @@ def disease_page():
         if pos < 0 or pos >= len(original) or pos >= len(mutated):
             continue
 
-        original_base = original[pos]
-        mutated_base = mutated[pos]
-
         change = d.get("change", "")
         if ">" not in change:
             continue
 
         expected_from, expected_to = change.split(">")
 
-        if original_base == expected_from and mutated_base == expected_to:
+        if original[pos] == expected_from and mutated[pos] == expected_to:
             matches.append({
                 "gene": d.get("gene", "Unknown"),
                 "pos": d.get("pos", "?"),
@@ -111,7 +120,3 @@ def disease_page():
 @app.route('/dashboard')
 def dashboard_page():
     return render_template('dashboard.html')
-
-if __name__ == '__main__':
-    app.run(debug=True, port=3000)
-
